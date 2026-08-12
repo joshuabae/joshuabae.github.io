@@ -29,10 +29,10 @@ jobs:
         with:
           node-version: 20
       - run: pnpm install --no-frozen-lockfile
-      - run: BASE_PATH=/ pnpm run build
+      - run: BASE_PATH=/ pnpm --filter @workspace/personal-site run build
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/public
+          path: artifacts/personal-site/dist/public
       - uses: actions/deploy-pages@v4
         id: deployment

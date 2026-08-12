@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Personal Website"
+description = "A clean, minimal personal website with career progression, blog articles, and social links. GitHub Pages-ready static site."
+version = "1.0.0"
+id = "artifacts/personal-site"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25158
+
+[services.development]
+run = "pnpm --filter @workspace/personal-site run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/personal-site", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/personal-site/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25158"
+BASE_PATH = "/"
